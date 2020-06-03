@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Lock</title>
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"-->
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+    <section class="section hero is-primary">
+      <div class="container has-text-centered">
+        <h1 class="title is-2"><i class="fas fa-lock"></i> Simple Lock</h1>
+        <p class="title is-5">
+          Embed A Simple Password Lock on Your Website
+        </p>
+      </div>
+    </section>
+
+    
+
+    <section class="section container">
+
+      <form id="form">
+        <div class="field has-icons-left control">
+          <input id="password" class="input" type="text" placeholder="Password" autocomplete="off">
+          <span class="icon is-left">
+          <i class="fa fa-lock"></i>
+          </span>
+          <label for="password" class="label is-sr-only">Password</label>
+        </div>
+        <div class="field has-icons-left control">
+          <input id="success" class="input" type="text" placeholder="Success Message"  autocomplete="off">
+          <span class="icon is-left">
+          <i class="fa fa-font"></i>
+          </span>
+          <label for="success" class="label is-sr-only">Success Message</label>
+        </div>
+        <div class="field">
+          <button id="submit" type="submit" class="button is-info">
+          Create Link
+          </button>
+        </div>
+      </form>
+
+      <div id="embedfield" class="is-hidden">
+        <div class="field">
+          <br><br>
+          <label class="title">Embed this URL</label>
+          <input id="embed" class="input" type="text" autocomplete="off" readonly>
+        </div>
+        <br><br>
+        <h2 class="title">Preview</h2>
+        <iframe class="box" id="preview"></iframe>
+      </div>
+
+    </section>
+
+    <script>
+      $("#form").on("submit", function(e){
+        e.preventDefault()
+      
+        $('#submit').addClass('is-loading')
+      
+        const password = $('#password').val()
+        const success = $('#success').val()
+      
+        const data = {'password':password, 'success':success}
+      
+        $.ajax({
+          type: "POST",
+          url: "/api/add",
+          data: data,
+          success: function(data){
+            const url = "/embed/" + data
+            $('#preview').attr('src', url)
+            $('#embed').val(location.origin + url)
+
+            $('#submit').removeClass('is-loading')
+            $('#embedfield').removeClass('is-hidden')
+          },
+        });
+      })
+    </script>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          Created by <a href="https://jchacko.dev" target="_blank">Jonathan Chacko</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
+        </p>
+        <a class="button is-dark">
+        <span class="icon">
+        <i class="fab fa-github"> </i>
+        </span>
+        <span> GitHub </span>
+        </a>
+      </div>
+    </footer>
+
+    <style>
+      iframe{
+        width: 100%;
+        height: 300px;
+      }
+    </style>
+
+  </body>
+</html>

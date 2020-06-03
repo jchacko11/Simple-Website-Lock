@@ -1,0 +1,72 @@
+	<link href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" rel="stylesheet" type="text/css" />
+
+	<h1 class="title is-4">Enter the password:</h1>
+
+	<form id="form" class="field has-addons">
+		<div class="control">
+			<input id="password" class="input" type="text" placeholder="Enter the password" autocomplete="off">
+      </div>
+      <div class="control">
+        <button id="submit" type="submit" class="button is-info">
+        Search
+        </button>
+      </div>
+    </form>
+
+    <div id="failure" class="notification is-danger is-light is-hidden content">
+      Wrong answer. Try again!
+    </div>
+    <div id="success" class="notification is-success is-light is-hidden content"></div>
+
+    <script>
+      function get(name){
+        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+            return decodeURIComponent(name[1]);
+      }
+
+      const form = document.getElementById('form');
+      form.addEventListener('submit', logSubmit);
+      
+      function logSubmit(e){
+        e.preventDefault();
+      
+        const submit = document.getElementById('submit')
+        const password = document.getElementById("password")
+        const failure = document.getElementById("failure")
+        const success = document.getElementById("success")
+        
+        submit.classList.add("is-loading")
+
+        const name = "{{ name }}"
+
+        let request = new XMLHttpRequest()
+        request.open('GET', '/api/check?name=' + name + '&password=' + password.value)
+        request.send()
+      
+        request.onload = () => {
+      
+          if (request.status == 200) {
+            console.log(request.response)
+      
+           if(request.response != 'false'){
+            success.innerHTML = request.response
+            success.classList.remove("is-hidden");
+            failure.classList.add("is-hidden");
+           }else{ 
+             failure.classList.remove("is-hidden");
+             success.classList.add("is-hidden");
+           }
+      
+          }
+          document.getElementById('submit').classList.remove("is-loading")
+        }
+               
+      }
+        
+    </script>
+
+    <style>
+      body{
+        background: transparent !important;
+      }
+    </style>
