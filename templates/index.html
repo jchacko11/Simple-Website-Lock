@@ -21,7 +21,6 @@
       </div>
     </section>
 
-    
 
     <section class="section container">
 
@@ -42,7 +41,6 @@
           </span>
           <label for="success" class="label is-sr-only">Success Message</label>
           <p class="help">This will be shown if the entered password is correct</p>
-
         </div>
 
         <br>
@@ -73,9 +71,7 @@
           </span>
           <label for="background" class="label is-sr-only">Background Color (optional)</label>
           <p id="background-warning" class="help is-danger is-hidden">Make sure the color is valid</p>
-
         </div>
-
 
         <label class="checkbox">
           <input id="box" type="checkbox" checked>
@@ -97,29 +93,35 @@
           Get Link
           </button>
         </div>
+
       </form>
 
       <div id="embedfield" class="is-hidden">
+
         <div class="field">
           <br><br>
           <label class="title">Embed this URL</label>
           <input id="embed" class="input" type="text" autocomplete="off" readonly>
         </div>
+
         <br><br>
+
         <h2 class="title">Preview</h2>
         <iframe class="box" id="preview"></iframe>
+
       </div>
 
     </section>
 
     <script>
-
+      // check if string is a valid color
       const isColor = (strColor) => {
         const s = new Option().style;
         s.color = strColor;
         return s.color !== '';
       }
 
+      // make sure required questions are completed
       $( ".required" ).on("change keyup keydown paste", function() {
         var disabled = false
         
@@ -130,9 +132,9 @@
         })
 
         $("#submit").prop("disabled", disabled)
-
       });
 
+      // show warning if color is invalid
       $('#background').on("change keyup keydown paste", function(){
         if(!isColor($(this).val()) && $(this).val() != ""){
           $('#background-warning').removeClass('is-hidden')
@@ -146,20 +148,26 @@
         e.preventDefault()
       
         $('#submit').addClass('is-loading')
-      
+
         const password = $('#password').val()
         let success = $('#success').val()
-        const link = $('#link').val()
+        let link = $('#link').val()
         const linkText = $('#link-text').val()
         const background = $('#background').val()
         const box = $('#box').prop('checked')
         const header = $('#header').prop('checked')
 
-        
+        // if success message exists, add a line break before link
         if(success) success += "<br>"
+
+        if(!link.includes("//"))
+          link = "//" + link
+          
+
+        // add link/button
         if(link){
           if(linkText){
-            success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">asdf</a></div>`
+            success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">` + linkText + `</a></div>`
           }else{
             success += `<a class="" href="` + link + `" target="_blank">`+ link +`</a>`
           }
@@ -197,7 +205,7 @@
           Created by <a href="https://jchacko.dev" target="_blank">Jonathan Chacko</a>. The source code is licensed
           <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
         </p>
-        <a class="button is-dark">
+        <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
         <span class="icon">
         <i class="fab fa-github"> </i>
         </span>
