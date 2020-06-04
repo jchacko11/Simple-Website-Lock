@@ -39,7 +39,8 @@ def decode(key, string):
 
 def add_entry(entry):
     entry['hash'] = hash(entry['password'])
-    entry['success'] = encode(entry['password'], entry['success']).decode("utf-8")
+    entry['success'] = encode(entry['password'],
+                              entry['success']).decode("utf-8")
     entry.pop('password', None)
 
     data = json.dumps(entry)
@@ -71,7 +72,15 @@ def index():
 
 @app.route('/embed/<name>')
 def embed(name):
-    return render_template("embed.html", name=name)
+    embed = render_template("embed.html", name=name)
+    return embed
+
+
+@app.route('/txt/<name>')
+def text(name):
+    return app.response_class(
+        render_template("embed.html", name=name),
+        content_type='application/txt')
 
 
 @app.route('/api/add', methods=['POST'])
@@ -90,17 +99,20 @@ def user():
     success = checker(name, user_password)
 
     if success != False:
-        return {'success' : success}
+        return {'success': success}
     else:
-        return app.response_class(json.dumps(False), content_type='application/json')
-
+        return app.response_class(
+            json.dumps(False), content_type='application/json')
 
 
 @app.route('/api/get', methods=['GET'])
 def get_data():
     name = request.args.get("name")
     resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
-    return resp
+    if resp:
+      return resp
+    else:
+      return False
 
 
 if __name__ == "__main__":

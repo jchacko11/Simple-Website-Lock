@@ -66,7 +66,7 @@
 
         <div class="field has-icons-left control">
           <input id="background" class="input" type="text" placeholder="Background Color (optional)"  autocomplete="off">
-          <span class="icon is-left">
+          <span id="palette-icon" class="icon is-left">
           <i class="fa fa-palette"></i>
           </span>
           <label for="background" class="label is-sr-only">Background Color (optional)</label>
@@ -96,20 +96,33 @@
 
       </form>
 
+
+
+
+
       <div id="embedfield" class="is-hidden">
 
         <div class="field">
           <br><br>
-          <label class="title">Embed this URL</label>
+          <label for="embed" class="title">Embed URL</label>
           <input id="embed" class="input" type="text" autocomplete="off" readonly>
+          <br><br>
+
         </div>
 
-        <br><br>
+        <div class="field">
+          <label for="code" class="title">Embed Code</label>
+          <p class="control">
+            <textarea id="code" class="textarea" spellcheck="false" readonly></textarea>
+          </p>
+        </div>
+        <br>
 
         <h2 class="title">Preview</h2>
         <iframe class="box" id="preview"></iframe>
 
       </div>
+
 
     </section>
 
@@ -136,10 +149,13 @@
 
       // show warning if color is invalid
       $('#background').on("change keyup keydown paste", function(){
-        if(!isColor($(this).val()) && $(this).val() != ""){
+        var colorVal = $(this).val()
+        
+        if(!isColor(colorVal) && colorVal != ""){
           $('#background-warning').removeClass('is-hidden')
         }else{
           $('#background-warning').addClass('is-hidden')
+          $("#palette-icon").css("color", colorVal);
         }
       })
       
@@ -160,12 +176,13 @@
         // if success message exists, add a line break before link
         if(success) success += "<br>"
 
-        if(!link.includes("//"))
-          link = "//" + link
-          
 
+  
         // add link/button
         if(link){
+          if(!link.includes("//"))
+            link = "//" + link
+
           if(linkText){
             success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">` + linkText + `</a></div>`
           }else{
@@ -192,10 +209,20 @@
             $('#preview').attr('src', url)
             $('#embed').val(location.origin + url)
 
+            $('#code').val(getEmbedCode(location.origin + url))
+
             $('#submit').removeClass('is-loading')
             $('#embedfield').removeClass('is-hidden')
+
           },
         });
+
+
+        function getEmbedCode(url){
+          return `<iframe style="width: 100%; height: 100vh; overflow: show;" src="`+url+`" width="100" height="100" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
+        }
+
+        
       })
     </script>
 

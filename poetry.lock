@@ -76,8 +76,8 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "1.0.1"
 
 [metadata]
-content-hash = "6678534c57a2d58014d2f0924d31df7decacaf4a3763849a4e3281fde21fde88"
-python-versions = "^3.7"
+content-hash = "bc0f94770a3fe881ee3f0fda63368b1cd1439e3bb2ac3ca687040f0baaf64ee3"
+python-versions = "^3.8"
 
 [metadata.hashes]
 click = ["d2b5255c7c6349bc1bd1e59e08cd12acbbd63ce649f2588755783aa94dfb6b1a", "dacca89f4bfadd5de3d7489b7c8a566eee0d3676333fbb50030263894c38c0dc"]
