@@ -1,6 +1,5 @@
-from flask import Flask
-import hashlib
 from flask import Flask, request, json, render_template
+import hashlib
 import base64
 import requests
 from flask_cors import CORS

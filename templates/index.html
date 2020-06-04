@@ -40,6 +40,23 @@
           </span>
           <label for="success" class="label is-sr-only">Success Message</label>
         </div>
+
+        <div class="field has-icons-left control">
+          <input id="link" class="input" type="text" placeholder="Link URL (optional)"  autocomplete="off">
+          <span class="icon is-left">
+          <i class="fa fa-link"></i>
+          </span>
+          <label for="success" class="label is-sr-only">Link URL (optional)</label>
+        </div>
+
+        <div class="field has-icons-left control">
+          <input id="link-text" class="input" type="text" placeholder="Link Text (optional)"  autocomplete="off">
+          <span class="icon is-left">
+          <i class="fa fa-link"></i>
+          </span>
+          <label for="success" class="label is-sr-only">Link Text (optional)</label>
+        </div>
+
         <div class="field">
           <button id="submit" type="submit" class="button is-info">
           Create Link
@@ -67,7 +84,18 @@
         $('#submit').addClass('is-loading')
       
         const password = $('#password').val()
-        const success = $('#success').val()
+        let success = $('#success').val()
+        const link = $('#link').val()
+        const linkText = $('#link-text').val()
+        
+        if(success) success += "<br>"
+        if(link){
+          if(linkText){
+            success += `<a class="button is-primary" href="` + link + `" target="_blank">asdf</a>`
+          }else{
+            success += `<a class="" href="` + link + `" target="_blank">`+ link +`</a>`
+          }
+        }
       
         const data = {'password':password, 'success':success}
       
