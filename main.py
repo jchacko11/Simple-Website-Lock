@@ -37,11 +37,11 @@ def decode(key, string):
     return encoded_string
 
 
-def add_entry(password, success):
+def add_entry(password, success, background='white', box='false', header='true'):
     hashed = hash(password)
     success_encoded = encode(password, success).decode("utf-8")
 
-    data = '{"hash" : "' + hashed + '", "success" : "' + success_encoded + '"}'
+    data = '{"hash" : "' + hashed + '", "success" : "' + success_encoded + '", "background" : "' + background + '", "box" : "' + box + '", "header" : "' + header + '"}'
 
     r = requests.post(BASE_URL + 'keys.json', data=data)
     name = r.json()["name"]
@@ -76,10 +76,14 @@ def embed(name):
 @app.route('/api/add', methods=['POST'])
 def add():
     data = request.form
+    
     password = data['password']
     success = data['success']
+    background = data['background']
+    box = data['box']
+    header = data['header']
 
-    name = add_entry(password, success)
+    name = add_entry(password, success, background, box, header)
     return name
 
 
@@ -91,7 +95,25 @@ def user():
     success = checker(name, user_password)
 
     if success != False:
-        return success
+        return {'success' : success}
+    else:
+        return app.response_class(json.dumps(False), content_type='application/json')
+
+
+
+@app.route('/api/get', methods=['GET'])
+def get_data():
+    name = request.args.get("name")
+
+    resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
+
+    background = resp["background"]
+    box = resp["box"]
+    header = resp["header"]
+
+    if background != False:
+        print(background)
+        return {"background": background, "box": box, "header": header}
     else:
         return app.response_class(json.dumps(False), content_type='application/json')
 

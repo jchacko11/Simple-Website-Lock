@@ -26,20 +26,27 @@
     <section class="section container">
 
       <form id="form">
+        
         <div class="field has-icons-left control">
-          <input id="password" class="input" type="text" placeholder="Password" autocomplete="off">
+          <input id="password" class="input is-large required" type="text" placeholder="Password" autocomplete="off">
           <span class="icon is-left">
           <i class="fa fa-lock"></i>
           </span>
           <label for="password" class="label is-sr-only">Password</label>
         </div>
+        
         <div class="field has-icons-left control">
-          <input id="success" class="input" type="text" placeholder="Success Message"  autocomplete="off">
+          <input id="success" class="input is-large required" type="text" placeholder="Success Message"  autocomplete="off">
           <span class="icon is-left">
           <i class="fa fa-font"></i>
           </span>
           <label for="success" class="label is-sr-only">Success Message</label>
+          <p class="help">This will be shown if the entered password is correct</p>
+
         </div>
+
+        <br>
+        <h3 class="title is-4">Advanced Options</h3>
 
         <div class="field has-icons-left control">
           <input id="link" class="input" type="text" placeholder="Link URL (optional)"  autocomplete="off">
@@ -47,19 +54,47 @@
           <i class="fa fa-link"></i>
           </span>
           <label for="success" class="label is-sr-only">Link URL (optional)</label>
+          <p class="help">Make sure to enter the full website address</p>
         </div>
 
         <div class="field has-icons-left control">
-          <input id="link-text" class="input" type="text" placeholder="Link Text (optional)"  autocomplete="off">
+          <input id="link-text" class="input" type="text" placeholder="Link Button Text (optional)"  autocomplete="off">
           <span class="icon is-left">
-          <i class="fa fa-link"></i>
+          <i class="fa fa-font"></i>
           </span>
-          <label for="success" class="label is-sr-only">Link Text (optional)</label>
+          <label for="link-text" class="label is-sr-only">Link Button Text (optional)</label>
+          <p class="help">Turns link into a button</p>
         </div>
 
+        <div class="field has-icons-left control">
+          <input id="background" class="input" type="text" placeholder="Background Color (optional)"  autocomplete="off">
+          <span class="icon is-left">
+          <i class="fa fa-palette"></i>
+          </span>
+          <label for="background" class="label is-sr-only">Background Color (optional)</label>
+          <p id="background-warning" class="help is-danger is-hidden">Make sure the color is valid</p>
+
+        </div>
+
+
+        <label class="checkbox">
+          <input id="box" type="checkbox" checked>
+          Box Background
+        </label>
+        
+        <br>
+
+        <label class="checkbox">
+          <input id="header" type="checkbox" checked>
+          Show Header
+        </label>
+
+        <br>
+        <br>
+
         <div class="field">
-          <button id="submit" type="submit" class="button is-info">
-          Create Link
+          <button id="submit" type="submit" class="button is-primary is-large is-fullwidth" disabled>
+          Get Link
           </button>
         </div>
       </form>
@@ -78,6 +113,35 @@
     </section>
 
     <script>
+
+      const isColor = (strColor) => {
+        const s = new Option().style;
+        s.color = strColor;
+        return s.color !== '';
+      }
+
+      $( ".required" ).on("change keyup keydown paste", function() {
+        var disabled = false
+        
+        $(".required" ).each(function(){
+          if($(this).val() == ""){
+            disabled = true
+          }
+        })
+
+        $("#submit").prop("disabled", disabled)
+
+      });
+
+      $('#background').on("change keyup keydown paste", function(){
+        if(!isColor($(this).val()) && $(this).val() != ""){
+          $('#background-warning').removeClass('is-hidden')
+        }else{
+          $('#background-warning').addClass('is-hidden')
+        }
+      })
+      
+
       $("#form").on("submit", function(e){
         e.preventDefault()
       
@@ -87,17 +151,29 @@
         let success = $('#success').val()
         const link = $('#link').val()
         const linkText = $('#link-text').val()
+        const background = $('#background').val()
+        const box = $('#box').prop('checked')
+        const header = $('#header').prop('checked')
+
         
         if(success) success += "<br>"
         if(link){
           if(linkText){
-            success += `<a class="button is-primary" href="` + link + `" target="_blank">asdf</a>`
+            success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">asdf</a></div>`
           }else{
             success += `<a class="" href="` + link + `" target="_blank">`+ link +`</a>`
           }
         }
-      
-        const data = {'password':password, 'success':success}
+
+        const data = {
+          'password':password, 
+          'success':success, 
+          'background': (background ? background : 'unset'),
+          'box': box,
+          'header': header
+        }
+
+        console.log(data)
       
         $.ajax({
           type: "POST",
@@ -133,8 +209,17 @@
     <style>
       iframe{
         width: 100%;
-        height: 300px;
+        height: 400px;
       }
+      .help{
+        opacity: 0.5;
+      }
+      .section.hero.is-primary, #submit{
+        background: rgb(63,97,181);
+        background: linear-gradient(135deg, rgba(63,97,181,1) 25%, rgba(63,81,181,1) 50%, rgba(75,63,181,1) 75%);
+
+      }
+
     </style>
 
   </body>
