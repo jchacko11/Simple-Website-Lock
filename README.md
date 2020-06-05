@@ -10,11 +10,6 @@ The password that you enter is used to encode your hidden content using a Vigen√
 ### Checking password
 The user's password attempt is hashed and checked against the hashed password stored in the database. If they match, then the user's attempt is valid, and therefore can be used to decode the content (using the Vigen√®re cipher).
 
-
-### Example
-For the link ```/embed/-M92863NYdP6atdVsCYG_```, replace
-```const name = "{{ name }}"``` in [embed.html](templates/embed.html) with ```const name = -M92863NYdP6atdVsCYG_```.
-
 ## Routes
 ### GET ```/```
 Website homepage
