@@ -12,6 +12,7 @@
 # below:
 .git
 .gitignore
+api-map.png
 
 .idea/
 venv/

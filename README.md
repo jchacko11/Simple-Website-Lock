@@ -4,6 +4,7 @@ Creates a very simple, embeddable, password protected lock to hide a small amoun
 **This tool is not secure enough to be used in any security-focused setting. Use with caution.** 
 
 ## How it works
+![diagram](api-map.PNG)
 ### Storing your data
 The password that you enter is used to encode your hidden content using a Vigenère cipher, which should not be used for any security applications. However, for short messages it is virtually unbreakable. The password is then hashed using MD5, and stored with the enoded content in the database.
 
