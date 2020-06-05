@@ -15,6 +15,7 @@
 
 .idea/
 venv/
+.github/
 
 # Python pycache:
 __pycache__/

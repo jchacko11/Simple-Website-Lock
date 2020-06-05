@@ -26,3 +26,7 @@ Embeddable website link for a specified name
 Used to check if password is correct. Return ```"false"``` if not correct, returns success message if correct. Takes in name and password url parameters as strings.
 ### POST ```/api/add```
 Adds POSTed data object to realtime database. Must have ```password``` and ```success``` field.
+## Funding
+If this tool has helped you, consider buying me a coffee.
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L81FX1O)
