@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bulma-toast@2.0.1/dist/bulma-toast.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
 </head>
-
 <body>
-
 <section class="section hero is-primary">
     <div class="container has-text-centered">
         <h1 class="title is-2"><i class="fas fa-lock"></i> Simple Lock</h1>
@@ -20,118 +20,110 @@
         </p>
     </div>
 </section>
-
-
 <section class="section container">
-
     <form id="form">
-
         <div class="field has-icons-left control">
             <input id="password" class="input is-large required" type="text" placeholder="Password" autocomplete="off">
             <span class="icon is-left">
-          <i class="fa fa-lock"></i>
-          </span>
+                    <i class="fa fa-lock"></i>
+                    </span>
             <label for="password" class="label is-sr-only">Password</label>
         </div>
-
         <div class="field has-icons-left control">
             <input id="success" class="input is-large required" type="text" placeholder="Success Message"
                    autocomplete="off">
             <span class="icon is-left">
-          <i class="fa fa-font"></i>
-          </span>
+                    <i class="fa fa-font"></i>
+                    </span>
             <label for="success" class="label is-sr-only">Success Message</label>
             <p class="help">This will be shown if the entered password is correct</p>
         </div>
-
         <br>
         <h3 class="title is-4">Advanced Options</h3>
-
         <div class="field has-icons-left control">
             <input id="link" class="input" type="text" placeholder="Link URL (optional)" autocomplete="off">
             <span class="icon is-left">
-          <i class="fa fa-link"></i>
-          </span>
+                    <i class="fa fa-link"></i>
+                    </span>
             <label for="success" class="label is-sr-only">Link URL (optional)</label>
             <p class="help">Make sure to enter the full website address</p>
         </div>
-
         <div class="field has-icons-left control">
             <input id="link-text" class="input" type="text" placeholder="Link Button Text (optional)"
                    autocomplete="off">
             <span class="icon is-left">
-          <i class="fa fa-font"></i>
-          </span>
+                    <i class="fa fa-font"></i>
+                    </span>
             <label for="link-text" class="label is-sr-only">Link Button Text (optional)</label>
             <p class="help">Turns your link into a button</p>
         </div>
-
         <div class="field has-icons-left control">
             <input id="background" class="input" type="text" placeholder="Background Color (optional)"
                    autocomplete="off">
             <span id="palette-icon" class="icon is-left">
-          <i class="fa fa-palette"></i>
-          </span>
+                    <i class="fa fa-palette"></i>
+                    </span>
             <label for="background" class="label is-sr-only">Background Color (optional)</label>
             <p id="background-warning" class="help is-danger is-hidden">Make sure the color is valid</p>
         </div>
-
         <label class="checkbox">
             <input id="box" type="checkbox" checked>
             Box Background
         </label>
-
         <br>
-
         <label class="checkbox">
             <input id="header" type="checkbox" checked>
             Show Header
         </label>
-
         <br>
-
         <label class="checkbox">
             <input id="container" type="checkbox" checked>
             Fill size of container
         </label>
-
         <br>
         <br>
-
         <div class="field">
             <button id="submit" type="submit" class="button is-primary is-large is-fullwidth" disabled>
                 Get Embed
             </button>
         </div>
-
     </form>
-
-
     <div id="embedfield" class="is-hidden">
-
         <br><br>
-
-        <div class="field">
-            <label for="code" class="title">Embed Code</label>
-            <p class="control">
+        <label for="code" class="title">Embed Code</label><br>
+        <div class="field is-grouped">
+            <p class="control is-expanded">
                 <textarea id="code" class="textarea" spellcheck="false" readonly></textarea>
+            </p>
+            <p class="control">
+                <button onClick="copyInput('code')" class="button">
+                        <span id="-" class="icon is-left">
+                        <i class="fa fa-clipboard"></i>
+                        </span>
+                    <span>Copy</span>
+                </button>
             </p>
         </div>
         <br>
-        <div class="field">
-            <label for="url" class="title">Embed URL</label>
-            <input id="url" class="input" type="text" autocomplete="off" readonly>
+        <label for="url" class="title">Embed URL</label><br>
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+                <input id="url" class="input" type="text" autocomplete="off" readonly>
+            </p>
+            <p class="control">
+                <button onClick="copyInput('url')" class="button has-icons-left">
+                        <span id="-" class="icon is-left">
+                        <i class="fa fa-clipboard"></i>
+                        </span>
+                    <span>Copy</span>
+                </button>
+            </p>
         </div>
         <br>
-
         <h2 class="title">Preview</h2>
         <iframe class="box" id="preview"></iframe>
-
     </div>
-
-
 </section>
-
 <script>
     // check if string is a valid color
     const isColor = (strColor) => {
@@ -231,15 +223,30 @@
             },
         });
 
-        function getEmbedCode(url, sizing) {
-            var container = sizing ? 'style="width: 100%; height: calc(100vh - 1rem);" ' : " ";
-            return `<iframe ` + container + `src="` + url + `" width="500" height="400" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
-        }
-
 
     })
-</script>
 
+    function getEmbedCode(url, sizing) {
+        var container = sizing ? 'style="width: 100%; height: calc(100vh - 1rem);" ' : " ";
+        return `<iframe ` + container + `src="` + url + `" width="500" height="400" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
+    }
+
+    function copyInput(id) {
+        /* Get the text field */
+        var copyText = document.getElementById(id);
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        bulmaToast.toast({message: "Copied!", type: "is-info", animate: {in: 'fadeIn', out: 'fadeOut'}});
+
+        return copyText.value
+    }
+</script>
 <footer class="footer">
     <div class="content has-text-centered">
         <p>
@@ -248,19 +255,18 @@
         </p>
         <div class="">
             <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
-            <span class="icon">
-            <i class="fab fa-github"> </i>
-            </span>
+                    <span class="icon">
+                    <i class="fab fa-github"> </i>
+                    </span>
                 <span> GitHub </span>
             </a>
             <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
             <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L4L81FX1O');
-            kofiwidget2.draw();</script>
+            kofiwidget2.draw();
+            </script>
         </div>
-
     </div>
 </footer>
-
 <style>
     iframe {
         width: 600px;
@@ -278,10 +284,7 @@
     .section.hero.is-primary, #submit {
         background: rgb(63, 97, 181);
         background: linear-gradient(135deg, rgba(63, 97, 181, 1) 25%, rgba(63, 81, 181, 1) 50%, rgba(75, 63, 181, 1) 75%);
-
     }
-
 </style>
-
 </body>
 </html>
