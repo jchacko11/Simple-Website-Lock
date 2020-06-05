@@ -61,7 +61,7 @@
           <i class="fa fa-font"></i>
           </span>
           <label for="link-text" class="label is-sr-only">Link Button Text (optional)</label>
-          <p class="help">Turns link into a button</p>
+          <p class="help">Turns your link into a button</p>
         </div>
 
         <div class="field has-icons-left control">
@@ -77,7 +77,7 @@
           <input id="box" type="checkbox" checked>
           Box Background
         </label>
-        
+
         <br>
 
         <label class="checkbox">
@@ -90,7 +90,7 @@
 
         <div class="field">
           <button id="submit" type="submit" class="button is-primary is-large is-fullwidth" disabled>
-          Get Link
+          Get Embed
           </button>
         </div>
 
@@ -137,7 +137,7 @@
       // make sure required questions are completed
       $( ".required" ).on("change keyup keydown paste", function() {
         var disabled = false
-        
+
         $(".required" ).each(function(){
           if($(this).val() == ""){
             disabled = true
@@ -150,7 +150,7 @@
       // show warning if color is invalid
       $('#background').on("change keyup keydown paste", function(){
         var colorVal = $(this).val()
-        
+
         if(!isColor(colorVal) && colorVal != ""){
           $('#background-warning').removeClass('is-hidden')
         }else{
@@ -158,11 +158,11 @@
           $("#palette-icon").css("color", colorVal);
         }
       })
-      
+
 
       $("#form").on("submit", function(e){
         e.preventDefault()
-      
+
         $('#submit').addClass('is-loading')
 
         const password = $('#password').val()
@@ -177,7 +177,7 @@
         if(success) success += "<br>"
 
 
-  
+
         // add link/button
         if(link){
           if(!link.includes("//"))
@@ -191,15 +191,15 @@
         }
 
         const data = {
-          'password':password, 
-          'success':success, 
+          'password':password,
+          'success':success,
           'background': (background ? background : 'unset'),
           'box': box,
           'header': header
         }
 
         console.log(data)
-      
+
         $.ajax({
           type: "POST",
           url: "/api/add",
@@ -222,7 +222,7 @@
           return `<iframe style="width: 100%; height: 100vh; overflow: show;" src="`+url+`" width="100" height="100" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
         }
 
-        
+
       })
     </script>
 
@@ -230,14 +230,18 @@
       <div class="content has-text-centered">
         <p>
           Created by <a href="https://jchacko.dev" target="_blank">Jonathan Chacko</a>. The source code is licensed
-          <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
+          <a href="https://github.com/jchacko11/Simple-Website-Lock/blob/master/LICENSE" target="_blank">MIT</a>.
         </p>
-        <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
-        <span class="icon">
-        <i class="fab fa-github"> </i>
-        </span>
-        <span> GitHub </span>
-        </a>
+        <div class="">
+          <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
+            <span class="icon">
+            <i class="fab fa-github"> </i>
+            </span>
+            <span> GitHub </span>
+          </a>
+          <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L4L81FX1O');kofiwidget2.draw();</script>
+        </div>
+
       </div>
     </footer>
 
