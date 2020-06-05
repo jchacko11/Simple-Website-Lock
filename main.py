@@ -70,10 +70,18 @@ def index():
     return render_template("index.html")
 
 
-@app.route('/embed/<name>')
-def embed(name):
-    embed_template = render_template("embed.html", name=name)
-    return embed_template
+@app.route('/embed')
+def embed():
+    name = request.args.get("name")
+    background = request.args.get("background")
+    box = request.args.get("box").lower() in ['true', '1', 't', 'y', 'yes', 'yeah', 'yup', 'certainly', 'uh-huh']
+    header = request.args.get("header")
+
+    resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
+    if resp:
+        return render_template("embed.html", name=name, background=background, box=box, header=header)
+    else:
+        return render_template("404.html"), 404
 
 
 @app.route('/api/add', methods=['POST'])
@@ -99,6 +107,11 @@ def user():
     else:
         return app.response_class(
             json.dumps(False), content_type='application/json')
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == "__main__":

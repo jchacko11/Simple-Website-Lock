@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simple Lock</title>
-    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"-->
-    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
+    <link rel="stylesheet" href="/static/bulmaswatch-materia.css">
+
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bulma-toast@2.0.1/dist/bulma-toast.min.js"></script>
@@ -192,12 +192,6 @@
             'success': success,
         };
 
-        const format = {
-            'background': (background ? background : 'unset'),
-            'box': box,
-            'header': header
-        };
-
         console.log(data);
 
         $.ajax({
@@ -205,7 +199,14 @@
             url: "/api/add",
             data: data,
             success: function (data) {
-                const url = location.origin + "/embed/" + data + "?" + $.param(format);
+                const format = {
+                    'name': data,
+                    'background': background,
+                    'box': box,
+                    'header': header ? "Enter the password" : ""
+                };
+
+                const url = location.origin + "/embed?" + $.param(format);
 
                 $('#preview').attr('src', url);
                 $('#url').val(url);

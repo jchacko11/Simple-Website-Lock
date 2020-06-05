@@ -9,12 +9,25 @@
         .notification {
             margin-right: 1rem;
         }
+        #container.box-applied{
+            height: calc(100vh - 4rem);
+            overflow: auto;
+        }
+
+        body.box-applied{
+            padding: 1rem;
+        }
+        body:not(.box-applied){
+            height: 100vh;
+        }
+
     </style>
 </head>
 
-<body id="body">
-<div id="container">
-    <h1 id="header" class="title is-4 is-hidden">Enter the password</h1>
+<body id="body" style="background: {{ background }}" class="{{'box-applied' if box }}">
+
+<div id="container" class="{{'box-applied box' if box }}">
+    <h1 id="header" class="title is-4 {{'is-hidden' if not header }}">{{ header }}</h1>
     <form id="form" class="field has-addons">
         <div class="control">
             <input id="password" class="input" type="text" placeholder="Enter the password" autocomplete="off">
@@ -31,15 +44,6 @@
     <div id="success" class="notification is-success is-light is-hidden content"></div>
 </div>
 <script>
-    const name = "{{ name }}";
-
-    function getUrlVars() {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-            vars[key] = value;
-        });
-        return vars;
-    }
 
     const submit = document.getElementById('submit');
     const password = document.getElementById("password");
@@ -53,25 +57,6 @@
     const form = document.getElementById('form');
     form.addEventListener('submit', logSubmit);
 
-    const params = getUrlVars();
-
-    if (params['background'] && params['background'] != "unset") {
-        body.style.background = decodeURIComponent(params['background'])
-    }
-
-    if (params['box'] == 'true') {
-        container.style.height = "calc(100vh - 4rem)";
-        container.style.overflow = "auto";
-        container.classList.add("box");
-        body.style.padding = "1rem"
-    } else {
-        body.style.height = "100vh"
-    }
-
-    if (params['header'] == 'true') {
-        header.classList.remove("is-hidden")
-    }
-
 
     function logSubmit(e) {
         if (e)
@@ -80,7 +65,7 @@
         submit.classList.add("is-loading");
 
         let request = new XMLHttpRequest();
-        request.open('GET', '/api/check?name=' + name + '&password=' + password.value);
+        request.open('GET', '/api/check?name=' + "{{ name }}" + '&password=' + password.value);
         request.send();
 
         request.onload = () => {
