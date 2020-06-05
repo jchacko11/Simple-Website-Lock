@@ -10,7 +10,7 @@ CORS(app)
 BASE_URL = "https://simple-website-lock-ab27.firebaseio.com/"
 
 
-def hash(str):
+def get_hash(str):
     return hashlib.md5(str.encode('utf-8')).hexdigest()
 
 
@@ -38,7 +38,7 @@ def decode(key, string):
 
 
 def add_entry(entry):
-    entry['hash'] = hash(entry['password'])
+    entry['hash'] = get_hash(entry['password'])
     entry['success'] = encode(entry['password'],
                               entry['success']).decode("utf-8")
     entry.pop('password', None)
@@ -55,7 +55,7 @@ def checker(name, user_password):
     resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
 
     # check if user password is valid
-    if hash(user_password) == resp["hash"]:
+    if get_hash(user_password) == resp["hash"]:
         # decode the success text
         decoded_success = resp["success"].encode("utf-8")
         decoded_success = decode(user_password, decoded_success)
@@ -72,8 +72,8 @@ def index():
 
 @app.route('/embed/<name>')
 def embed(name):
-    embed = render_template("embed.html", name=name)
-    return embed
+    embed_template = render_template("embed.html", name=name)
+    return embed_template
 
 
 @app.route('/txt/<name>')
@@ -98,7 +98,7 @@ def user():
 
     success = checker(name, user_password)
 
-    if success != False:
+    if success is not False:
         return {'success': success}
     else:
         return app.response_class(
@@ -110,9 +110,9 @@ def get_data():
     name = request.args.get("name")
     resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
     if resp:
-      return resp
+        return resp
     else:
-      return False
+        return False
 
 
 if __name__ == "__main__":

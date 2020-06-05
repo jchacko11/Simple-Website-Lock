@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Simple Lock</title>
@@ -8,159 +8,166 @@
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/materia/bulmaswatch.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <section class="section hero is-primary">
-      <div class="container has-text-centered">
+<section class="section hero is-primary">
+    <div class="container has-text-centered">
         <h1 class="title is-2"><i class="fas fa-lock"></i> Simple Lock</h1>
         <p class="title is-5">
-          Embed A Simple Password Lock on Your Website
+            Embed A Simple Password Lock on Your Website
         </p>
-      </div>
-    </section>
+    </div>
+</section>
 
 
-    <section class="section container">
+<section class="section container">
 
-      <form id="form">
-        
+    <form id="form">
+
         <div class="field has-icons-left control">
-          <input id="password" class="input is-large required" type="text" placeholder="Password" autocomplete="off">
-          <span class="icon is-left">
+            <input id="password" class="input is-large required" type="text" placeholder="Password" autocomplete="off">
+            <span class="icon is-left">
           <i class="fa fa-lock"></i>
           </span>
-          <label for="password" class="label is-sr-only">Password</label>
+            <label for="password" class="label is-sr-only">Password</label>
         </div>
-        
+
         <div class="field has-icons-left control">
-          <input id="success" class="input is-large required" type="text" placeholder="Success Message"  autocomplete="off">
-          <span class="icon is-left">
+            <input id="success" class="input is-large required" type="text" placeholder="Success Message"
+                   autocomplete="off">
+            <span class="icon is-left">
           <i class="fa fa-font"></i>
           </span>
-          <label for="success" class="label is-sr-only">Success Message</label>
-          <p class="help">This will be shown if the entered password is correct</p>
+            <label for="success" class="label is-sr-only">Success Message</label>
+            <p class="help">This will be shown if the entered password is correct</p>
         </div>
 
         <br>
         <h3 class="title is-4">Advanced Options</h3>
 
         <div class="field has-icons-left control">
-          <input id="link" class="input" type="text" placeholder="Link URL (optional)"  autocomplete="off">
-          <span class="icon is-left">
+            <input id="link" class="input" type="text" placeholder="Link URL (optional)" autocomplete="off">
+            <span class="icon is-left">
           <i class="fa fa-link"></i>
           </span>
-          <label for="success" class="label is-sr-only">Link URL (optional)</label>
-          <p class="help">Make sure to enter the full website address</p>
+            <label for="success" class="label is-sr-only">Link URL (optional)</label>
+            <p class="help">Make sure to enter the full website address</p>
         </div>
 
         <div class="field has-icons-left control">
-          <input id="link-text" class="input" type="text" placeholder="Link Button Text (optional)"  autocomplete="off">
-          <span class="icon is-left">
+            <input id="link-text" class="input" type="text" placeholder="Link Button Text (optional)"
+                   autocomplete="off">
+            <span class="icon is-left">
           <i class="fa fa-font"></i>
           </span>
-          <label for="link-text" class="label is-sr-only">Link Button Text (optional)</label>
-          <p class="help">Turns your link into a button</p>
+            <label for="link-text" class="label is-sr-only">Link Button Text (optional)</label>
+            <p class="help">Turns your link into a button</p>
         </div>
 
         <div class="field has-icons-left control">
-          <input id="background" class="input" type="text" placeholder="Background Color (optional)"  autocomplete="off">
-          <span id="palette-icon" class="icon is-left">
+            <input id="background" class="input" type="text" placeholder="Background Color (optional)"
+                   autocomplete="off">
+            <span id="palette-icon" class="icon is-left">
           <i class="fa fa-palette"></i>
           </span>
-          <label for="background" class="label is-sr-only">Background Color (optional)</label>
-          <p id="background-warning" class="help is-danger is-hidden">Make sure the color is valid</p>
+            <label for="background" class="label is-sr-only">Background Color (optional)</label>
+            <p id="background-warning" class="help is-danger is-hidden">Make sure the color is valid</p>
         </div>
 
         <label class="checkbox">
-          <input id="box" type="checkbox" checked>
-          Box Background
+            <input id="box" type="checkbox" checked>
+            Box Background
         </label>
 
         <br>
 
         <label class="checkbox">
-          <input id="header" type="checkbox" checked>
-          Show Header
+            <input id="header" type="checkbox" checked>
+            Show Header
+        </label>
+
+        <br>
+
+        <label class="checkbox">
+            <input id="container" type="checkbox" checked>
+            Fill size of container
         </label>
 
         <br>
         <br>
 
         <div class="field">
-          <button id="submit" type="submit" class="button is-primary is-large is-fullwidth" disabled>
-          Get Embed
-          </button>
+            <button id="submit" type="submit" class="button is-primary is-large is-fullwidth" disabled>
+                Get Embed
+            </button>
         </div>
 
-      </form>
+    </form>
 
 
-
-
-
-      <div id="embedfield" class="is-hidden">
+    <div id="embedfield" class="is-hidden">
 
         <div class="field">
-          <br><br>
-          <label for="embed" class="title">Embed URL</label>
-          <input id="embed" class="input" type="text" autocomplete="off" readonly>
-          <br><br>
+            <br><br>
+            <label for="url" class="title">Embed URL</label>
+            <input id="url" class="input" type="text" autocomplete="off" readonly>
+            <br><br>
 
         </div>
 
         <div class="field">
-          <label for="code" class="title">Embed Code</label>
-          <p class="control">
-            <textarea id="code" class="textarea" spellcheck="false" readonly></textarea>
-          </p>
+            <label for="code" class="title">Embed Code</label>
+            <p class="control">
+                <textarea id="code" class="textarea" spellcheck="false" readonly></textarea>
+            </p>
         </div>
         <br>
 
         <h2 class="title">Preview</h2>
         <iframe class="box" id="preview"></iframe>
 
-      </div>
+    </div>
 
 
-    </section>
+</section>
 
-    <script>
-      // check if string is a valid color
-      const isColor = (strColor) => {
+<script>
+    // check if string is a valid color
+    const isColor = (strColor) => {
         const s = new Option().style;
         s.color = strColor;
         return s.color !== '';
-      }
+    }
 
-      // make sure required questions are completed
-      $( ".required" ).on("change keyup keydown paste", function() {
+    // make sure required questions are completed
+    $(".required").on("change keyup keydown paste", function () {
         var disabled = false
 
-        $(".required" ).each(function(){
-          if($(this).val() == ""){
-            disabled = true
-          }
+        $(".required").each(function () {
+            if ($(this).val() == "") {
+                disabled = true
+            }
         })
 
         $("#submit").prop("disabled", disabled)
-      });
+    });
 
-      // show warning if color is invalid
-      $('#background').on("change keyup keydown paste", function(){
+    // show warning if color is invalid
+    $('#background').on("change keyup keydown paste", function () {
         var colorVal = $(this).val()
 
-        if(!isColor(colorVal) && colorVal != ""){
-          $('#background-warning').removeClass('is-hidden')
-        }else{
-          $('#background-warning').addClass('is-hidden')
-          $("#palette-icon").css("color", colorVal);
+        if (!isColor(colorVal) && colorVal != "") {
+            $('#background-warning').removeClass('is-hidden')
+        } else {
+            $('#background-warning').addClass('is-hidden')
+            $("#palette-icon").css("color", colorVal);
         }
-      })
+    })
 
 
-      $("#form").on("submit", function(e){
+    $("#form").on("submit", function (e) {
         e.preventDefault()
 
         $('#submit').addClass('is-loading')
@@ -172,94 +179,109 @@
         const background = $('#background').val()
         const box = $('#box').prop('checked')
         const header = $('#header').prop('checked')
+        var sizing = $('#container').prop('checked')
 
         // if success message exists, add a line break before link
-        if(success) success += "<br>"
-
+        if (success) success += "<br>"
 
 
         // add link/button
-        if(link){
-          if(!link.includes("//"))
-            link = "//" + link
+        if (link) {
+            if (!link.includes("//"))
+                link = "//" + link
 
-          if(linkText){
-            success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">` + linkText + `</a></div>`
-          }else{
-            success += `<a class="" href="` + link + `" target="_blank">`+ link +`</a>`
-          }
+            if (linkText) {
+                success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">` + linkText + `</a></div>`
+            } else {
+                success += `<a class="" href="` + link + `" target="_blank">` + link + `</a>`
+            }
         }
 
         const data = {
-          'password':password,
-          'success':success,
-          'background': (background ? background : 'unset'),
-          'box': box,
-          'header': header
+            'password': password,
+            'success': success,
+            'background': (background ? background : 'unset'),
+            'box': box,
+            'header': header
         }
 
         console.log(data)
 
         $.ajax({
-          type: "POST",
-          url: "/api/add",
-          data: data,
-          success: function(data){
-            const url = "/embed/" + data
-            $('#preview').attr('src', url)
-            $('#embed').val(location.origin + url)
+            type: "POST",
+            url: "/api/add",
+            data: data,
+            success: function (data) {
+                const url = location.origin + "/embed/" + data
 
-            $('#code').val(getEmbedCode(location.origin + url))
+                $('#preview').attr('src', url)
+                $('#url').val(url)
+                $('#code').val(getEmbedCode(url, sizing))
 
-            $('#submit').removeClass('is-loading')
-            $('#embedfield').removeClass('is-hidden')
+                if(sizing){
+                    $('#preview').addClass('fill-size')
+                }else{
+                    $('#preview').removeClass('fill-size')
+                }
 
-          },
+                $('#submit').removeClass('is-loading')
+                $('#embedfield').removeClass('is-hidden')
+
+            },
         });
 
 
-        function getEmbedCode(url){
-          return `<iframe style="width: 100%; height: 100vh; overflow: show;" src="`+url+`" width="100" height="100" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
+        function getEmbedCode(url, sizing) {
+            var container = sizing ? 'style="width: 100%; height: calc(100vh - 1rem);" ' : " "
+            return `<iframe ` + container + `src="` + url + `" width="500" height="400" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
         }
 
 
-      })
-    </script>
+    })
+</script>
 
-    <footer class="footer">
-      <div class="content has-text-centered">
+<footer class="footer">
+    <div class="content has-text-centered">
         <p>
-          Created by <a href="https://jchacko.dev" target="_blank">Jonathan Chacko</a>. The source code is licensed
-          <a href="https://github.com/jchacko11/Simple-Website-Lock/blob/master/LICENSE" target="_blank">MIT</a>.
+            Created by <a href="https://jchacko.dev" target="_blank">Jonathan Chacko</a>. The source code is licensed
+            <a href="https://github.com/jchacko11/Simple-Website-Lock/blob/master/LICENSE" target="_blank">MIT</a>.
         </p>
         <div class="">
-          <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
+            <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
             <span class="icon">
             <i class="fab fa-github"> </i>
             </span>
-            <span> GitHub </span>
-          </a>
-          <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L4L81FX1O');kofiwidget2.draw();</script>
+                <span> GitHub </span>
+            </a>
+            <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
+            <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L4L81FX1O');
+            kofiwidget2.draw();</script>
         </div>
 
-      </div>
-    </footer>
+    </div>
+</footer>
 
-    <style>
-      iframe{
-        width: 100%;
+<style>
+    iframe {
+        width: 600px;
         height: 400px;
-      }
-      .help{
+    }
+
+    iframe.fill-size {
+        width: 100%;
+    }
+
+    .help {
         opacity: 0.5;
-      }
-      .section.hero.is-primary, #submit{
-        background: rgb(63,97,181);
-        background: linear-gradient(135deg, rgba(63,97,181,1) 25%, rgba(63,81,181,1) 50%, rgba(75,63,181,1) 75%);
+    }
 
-      }
+    .section.hero.is-primary, #submit {
+        background: rgb(63, 97, 181);
+        background: linear-gradient(135deg, rgba(63, 97, 181, 1) 25%, rgba(63, 81, 181, 1) 50%, rgba(75, 63, 181, 1) 75%);
 
-    </style>
+    }
 
-  </body>
+</style>
+
+</body>
 </html>
