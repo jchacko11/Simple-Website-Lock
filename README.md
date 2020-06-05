@@ -18,12 +18,20 @@ For the link ```/embed/-M92863NYdP6atdVsCYG_```, replace
 ## Routes
 ### GET ```/```
 Website homepage
-### GET ```/embed/<name>```
+### GET ```/embed```
 Embeddable website link for a specified name
+#### URL Params
+- ```name``` - *Required*, Name of lock 
+- ```background``` - Background color, accepts any valid CSS color
+- ```box``` - If true, shows box background 
+- ```header``` - Header text. If blank, header is hidden
 ### GET ```/api/check```
-Used to check if password is correct. Return ```"false"``` if not correct, returns success message if correct. Takes in name and password url parameters as strings.
+Used to check if password is correct. Return ```"false"``` if not correct, returns success message if correct.
+#### URL Params
+- ```name``` - *Required*, Name of lock 
+- ```password``` - *Required*, Password attempt
 ### POST ```/api/add```
-Adds POSTed data object to realtime database. Must have ```password``` and ```success``` field.
+Adds POSTed data object to realtime database. Must have ```password``` and ```success``` key in the object.
 ## Funding
 If this tool has helped you, consider buying me a coffee.
 

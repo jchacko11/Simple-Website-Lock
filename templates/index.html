@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
 </head>
 <body>
-<section class="section hero is-primary">
+<section class="section hero is-primary is-medium-large">
     <div class="container has-text-centered">
         <h1 class="title is-2"><i class="fas fa-lock"></i> Simple Lock</h1>
         <p class="title is-5">
@@ -39,7 +39,18 @@
             <p class="help">This will be shown if the entered password is correct</p>
         </div>
         <br>
-        <h3 class="title is-4">Advanced Options</h3>
+        <h3 class="title is-4">Customization Options</h3>
+
+        <div class="field has-icons-left control">
+            <input id="header" class="input" type="text" placeholder="Header Text (optional)" autocomplete="off"
+                   value="Enter the password">
+            <span class="icon is-left">
+                    <i class="fa fa-heading"></i>
+                    </span>
+            <label for="success" class="label is-sr-only">Header Text (optional)</label>
+            <p class="help">This appears above the password input box</p>
+        </div>
+
         <div class="field has-icons-left control">
             <input id="link" class="input" type="text" placeholder="Link URL (optional)" autocomplete="off">
             <span class="icon is-left">
@@ -69,11 +80,6 @@
         <label class="checkbox">
             <input id="box" type="checkbox" checked>
             Box Background
-        </label>
-        <br>
-        <label class="checkbox">
-            <input id="header" type="checkbox" checked>
-            Show Header
         </label>
         <br>
         <label class="checkbox">
@@ -160,16 +166,14 @@
 
     $("#form").on("submit", function (e) {
         e.preventDefault();
-
         $('#submit').addClass('is-loading');
 
         const password = $('#password').val();
         let success = $('#success').val();
+
         let link = $('#link').val();
         const linkText = $('#link-text').val();
-        const background = $('#background').val();
-        const box = $('#box').prop('checked');
-        const header = $('#header').prop('checked');
+
         const sizing = $('#container').prop('checked');
 
         // if success message exists, add a line break before link
@@ -201,9 +205,9 @@
             success: function (data) {
                 const format = {
                     'name': data,
-                    'background': background,
-                    'box': box,
-                    'header': header ? "Enter the password" : ""
+                    'background': $('#background').val(),
+                    'box': $('#box').prop('checked'),
+                    'header': $('#header').val()
                 };
 
                 const url = location.origin + "/embed?" + $.param(format);
@@ -255,7 +259,7 @@
             <a href="https://github.com/jchacko11/Simple-Website-Lock/blob/master/LICENSE" target="_blank">MIT</a>.
         </p>
         <p><i>This tool is not secure enough to be used in any security-focused setting. Use with caution.</i></p>
-        <div class="">
+        <div class="buttons is-centered">
             <a href="https://github.com/jchacko11/Simple-Website-Lock" target="_blank" class="button is-dark">
                     <span class="icon">
                     <i class="fab fa-github"> </i>
@@ -265,6 +269,9 @@
             <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
             <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#29abe0', 'L4L81FX1O');
             kofiwidget2.draw();
+            </script>
+            <script>
+                $(".kofi-button").removeClass("kofi-button").addClass('button')
             </script>
         </div>
     </div>
@@ -287,6 +294,11 @@
         background: rgb(63, 97, 181);
         background: linear-gradient(135deg, rgba(63, 97, 181, 1) 25%, rgba(63, 81, 181, 1) 50%, rgba(75, 63, 181, 1) 75%);
     }
+
+    .section.is-medium-large {
+        padding: 4rem 1.5rem;
+    }
+
 </style>
 </body>
 </html>
