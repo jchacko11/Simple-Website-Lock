@@ -1,7 +1,7 @@
 # Simple Website Lock
 Creates a very simple, embeddable, password protected lock to hide a small amount of content, ideal for digital breakouts in the classroom. Made with Flask, Firebase Realtime Database, and Bulma.
 
-**This tool is not secure enough to be used in any serious security-focused setting. Use with caution.** 
+**This tool is not secure enough to be used in any security-focused setting. Use with caution.** 
 
 ## How it works
 ### Storing your data
