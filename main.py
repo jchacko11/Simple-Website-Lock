@@ -76,18 +76,14 @@ def embed(name):
     return embed_template
 
 
-@app.route('/txt/<name>')
-def text(name):
-    return app.response_class(
-        render_template("embed.html", name=name),
-        content_type='application/txt')
-
-
 @app.route('/api/add', methods=['POST'])
 def add():
-    data = request.form
+    keys = ['password', 'success']
+    data = request.form.to_dict()
 
-    name = add_entry(data.to_dict())
+    filtered_dict = {key: data[key] for key in keys}
+
+    name = add_entry(filtered_dict)
     return name
 
 
@@ -105,15 +101,5 @@ def user():
             json.dumps(False), content_type='application/json')
 
 
-@app.route('/api/get', methods=['GET'])
-def get_data():
-    name = request.args.get("name")
-    resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
-    if resp:
-        return resp
-    else:
-        return False
-
-
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

@@ -109,19 +109,18 @@
 
     <div id="embedfield" class="is-hidden">
 
-        <div class="field">
-            <br><br>
-            <label for="url" class="title">Embed URL</label>
-            <input id="url" class="input" type="text" autocomplete="off" readonly>
-            <br><br>
-
-        </div>
+        <br><br>
 
         <div class="field">
             <label for="code" class="title">Embed Code</label>
             <p class="control">
                 <textarea id="code" class="textarea" spellcheck="false" readonly></textarea>
             </p>
+        </div>
+        <br>
+        <div class="field">
+            <label for="url" class="title">Embed URL</label>
+            <input id="url" class="input" type="text" autocomplete="off" readonly>
         </div>
         <br>
 
@@ -139,56 +138,55 @@
         const s = new Option().style;
         s.color = strColor;
         return s.color !== '';
-    }
+    };
 
     // make sure required questions are completed
     $(".required").on("change keyup keydown paste", function () {
-        var disabled = false
+        var disabled = false;
 
         $(".required").each(function () {
             if ($(this).val() == "") {
                 disabled = true
             }
-        })
+        });
 
         $("#submit").prop("disabled", disabled)
     });
 
     // show warning if color is invalid
     $('#background').on("change keyup keydown paste", function () {
-        var colorVal = $(this).val()
+        var colorVal = $(this).val();
 
         if (!isColor(colorVal) && colorVal != "") {
             $('#background-warning').removeClass('is-hidden')
         } else {
-            $('#background-warning').addClass('is-hidden')
+            $('#background-warning').addClass('is-hidden');
             $("#palette-icon").css("color", colorVal);
         }
-    })
+    });
 
 
     $("#form").on("submit", function (e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        $('#submit').addClass('is-loading')
+        $('#submit').addClass('is-loading');
 
-        const password = $('#password').val()
-        let success = $('#success').val()
-        let link = $('#link').val()
-        const linkText = $('#link-text').val()
-        const background = $('#background').val()
-        const box = $('#box').prop('checked')
-        const header = $('#header').prop('checked')
-        var sizing = $('#container').prop('checked')
+        const password = $('#password').val();
+        let success = $('#success').val();
+        let link = $('#link').val();
+        const linkText = $('#link-text').val();
+        const background = $('#background').val();
+        const box = $('#box').prop('checked');
+        const header = $('#header').prop('checked');
+        const sizing = $('#container').prop('checked');
 
         // if success message exists, add a line break before link
-        if (success) success += "<br>"
-
+        if (success) success += "<br>";
 
         // add link/button
         if (link) {
             if (!link.includes("//"))
-                link = "//" + link
+                link = "//" + link;
 
             if (linkText) {
                 success += `<div class="buttons"><a class="button is-primary" href="` + link + `" target="_blank">` + linkText + `</a></div>`
@@ -200,39 +198,41 @@
         const data = {
             'password': password,
             'success': success,
+        };
+
+        const format = {
             'background': (background ? background : 'unset'),
             'box': box,
             'header': header
-        }
+        };
 
-        console.log(data)
+        console.log(data);
 
         $.ajax({
             type: "POST",
             url: "/api/add",
             data: data,
             success: function (data) {
-                const url = location.origin + "/embed/" + data
+                const url = location.origin + "/embed/" + data + "?" + $.param(format);
 
-                $('#preview').attr('src', url)
-                $('#url').val(url)
-                $('#code').val(getEmbedCode(url, sizing))
+                $('#preview').attr('src', url);
+                $('#url').val(url);
+                $('#code').val(getEmbedCode(url, sizing));
 
-                if(sizing){
+                if (sizing) {
                     $('#preview').addClass('fill-size')
-                }else{
+                } else {
                     $('#preview').removeClass('fill-size')
                 }
 
-                $('#submit').removeClass('is-loading')
+                $('#submit').removeClass('is-loading');
                 $('#embedfield').removeClass('is-hidden')
 
             },
         });
 
-
         function getEmbedCode(url, sizing) {
-            var container = sizing ? 'style="width: 100%; height: calc(100vh - 1rem);" ' : " "
+            var container = sizing ? 'style="width: 100%; height: calc(100vh - 1rem);" ' : " ";
             return `<iframe ` + container + `src="` + url + `" width="500" height="400" scrolling="yes" frameborder="0">Iframes not supported</iframe>`
         }
 
