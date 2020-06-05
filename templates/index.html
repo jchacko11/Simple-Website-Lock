@@ -87,6 +87,11 @@
             Fill size of container
         </label>
         <br>
+        <label class="checkbox">
+            <input id="obscure" type="checkbox">
+            Obscure password text
+        </label>
+        <br>
         <br>
         <div class="field">
             <button id="submit" type="submit" class="button is-primary is-large is-fullwidth" disabled>
@@ -207,7 +212,8 @@
                     'name': data,
                     'background': $('#background').val(),
                     'box': $('#box').prop('checked'),
-                    'header': $('#header').val()
+                    'header': $('#header').val(),
+                    'obscure': $('#obscure').prop('checked')
                 };
 
                 const url = location.origin + "/embed?" + $.param(format);

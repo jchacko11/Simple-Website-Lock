@@ -72,14 +72,22 @@ def index():
 
 @app.route('/embed')
 def embed():
+    affirmative = ['true', '1', 't', 'y', 'yes', 'yeah', 'yup', 'certainly', 'uh-huh']
+
     name = request.args.get("name")
     background = request.args.get("background")
-    box = request.args.get("box").lower() in ['true', '1', 't', 'y', 'yes', 'yeah', 'yup', 'certainly', 'uh-huh']
+
+    box = request.args.get("box")
+    box = True if box and box.lower() in affirmative else False
+
+    obscure = request.args.get("obscure")
+    obscure = True if obscure and obscure.lower() in affirmative else False
+
     header = request.args.get("header")
 
     resp = requests.get(BASE_URL + "keys/" + name + ".json").json()
     if resp:
-        return render_template("embed.html", name=name, background=background, box=box, header=header)
+        return render_template("embed.html", name=name, background=background, box=box, header=header, obscure=obscure)
     else:
         return render_template("404.html"), 404
 

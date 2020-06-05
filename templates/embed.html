@@ -9,28 +9,31 @@
         .notification {
             margin-right: 1rem;
         }
-        #container.box-applied{
+
+        #container.box-applied {
             height: calc(100vh - 4rem);
             overflow: auto;
         }
 
-        body.box-applied{
+        body.box-applied {
             padding: 1rem;
         }
-        body:not(.box-applied){
+
+        body:not(.box-applied) {
             height: 100vh;
         }
 
     </style>
 </head>
 
-<body id="body" style="background: {{ background }}" class="{{'box-applied' if box }}">
+<body id="body" style="background: {{ background }}" class="{{ 'box-applied' if box }}">
 
-<div id="container" class="{{'box-applied box' if box }}">
-    <h1 id="header" class="title is-4 {{'is-hidden' if not header }}">{{ header }}</h1>
+<div id="container" class="{{ 'box-applied box' if box }}">
+    <h1 id="header" class="title is-4 {{ 'is-hidden' if not header }}">{{ header }}</h1>
     <form id="form" class="field has-addons">
         <div class="control">
-            <input id="password" class="input" type="text" placeholder="Enter the password" autocomplete="off">
+            <input id="password" class="input" type="{{ 'password' if obscure else 'text' }}"
+                   placeholder="Enter the password" autocomplete="off">
         </div>
         <div class="control">
             <button id="submit" type="submit" class="button is-info">
