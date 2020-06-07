@@ -70,7 +70,7 @@
         submit.classList.add("is-loading");
 
         let request = new XMLHttpRequest();
-        request.open('GET', '/api/check?name=' + "{{ name }}" + '&password=' + password.value);
+        request.open('GET', '/api/check?name=' + "{{ name }}" + '&password=' + encodeURIComponent(password.value));
         request.send();
 
         request.onload = () => {
