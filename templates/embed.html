@@ -1,6 +1,8 @@
 <html style="overflow: auto;">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/static/purify.min.js"></script>
+
     <style>
         .buttons {
             padding-top: .5rem;
@@ -78,7 +80,7 @@
                 let response = JSON.parse(request.response);
 
                 if (request.response != 'false') {
-                    success.innerHTML = response["success"];
+                    success.innerHTML = DOMPurify.sanitize(response["success"]);
 
                     success.classList.remove("is-hidden");
                     failure.classList.add("is-hidden");
