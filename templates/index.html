@@ -23,7 +23,8 @@
 <section class="section container">
     <form id="form">
         <div class="field has-icons-left control">
-            <input id="password" class="input is-large required" type="text" placeholder="Password" autocomplete="off">
+            <input id="password" class="input is-large required" type="text" placeholder="Password" autocomplete="off"
+                   maxlength="100">
             <span class="icon is-left">
                     <i class="fa fa-lock"></i>
                     </span>
@@ -31,7 +32,7 @@
         </div>
         <div class="field has-icons-left control">
             <input id="success" class="input is-large required" type="text" placeholder="Success Message"
-                   autocomplete="off">
+                   autocomplete="off" maxlength="5000">
             <span class="icon is-left">
                     <i class="fa fa-font"></i>
                     </span>
@@ -43,7 +44,7 @@
 
         <div class="field has-icons-left control">
             <input id="header" class="input" type="text" placeholder="Header Text (optional)" autocomplete="off"
-                   value="Enter the password">
+                   value="Enter the password" maxlength="10000">
             <span class="icon is-left">
                     <i class="fa fa-heading"></i>
                     </span>
@@ -52,7 +53,8 @@
         </div>
 
         <div class="field has-icons-left control">
-            <input id="link" class="input" type="text" placeholder="Link URL (optional)" autocomplete="off">
+            <input id="link" class="input" type="text" placeholder="Link URL (optional)" autocomplete="off"
+                   maxlength="2000">
             <span class="icon is-left">
                     <i class="fa fa-link"></i>
                     </span>
@@ -61,7 +63,7 @@
         </div>
         <div class="field has-icons-left control">
             <input id="link-text" class="input" type="text" placeholder="Link Button Text (optional)"
-                   autocomplete="off">
+                   autocomplete="off" maxlength="2000">
             <span class="icon is-left">
                     <i class="fa fa-font"></i>
                     </span>
@@ -70,7 +72,7 @@
         </div>
         <div class="field has-icons-left control">
             <input id="background" class="input" type="text" placeholder="Background Color (optional)"
-                   autocomplete="off">
+                   autocomplete="off" maxlength="100">
             <span id="palette-icon" class="icon is-left">
                     <i class="fa fa-palette"></i>
                     </span>
@@ -108,7 +110,7 @@
             </p>
             <p class="control">
                 <button onClick="copyInput('code')" class="button">
-                        <span id="-" class="icon is-left">
+                        <span class="icon is-left">
                         <i class="fa fa-clipboard"></i>
                         </span>
                     <span>Copy</span>
@@ -123,7 +125,7 @@
             </p>
             <p class="control">
                 <button onClick="copyInput('url')" class="button has-icons-left">
-                        <span id="-" class="icon is-left">
+                        <span class="icon is-left">
                         <i class="fa fa-clipboard"></i>
                         </span>
                     <span>Copy</span>
