@@ -80,7 +80,7 @@
                 let response = JSON.parse(request.response);
 
                 if (request.response != 'false') {
-                    success.innerHTML = DOMPurify.sanitize(response["success"]);
+                    success.innerHTML = DOMPurify.sanitize(response["success"], {ADD_ATTR: ['target']});
 
                     success.classList.remove("is-hidden");
                     failure.classList.add("is-hidden");

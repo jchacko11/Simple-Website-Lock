@@ -1,6 +1,8 @@
 # Simple Website Lock
 Creates a very simple, embeddable, password protected lock to hide a small amount of content, ideal for digital breakouts in the classroom. Made with Flask, Firebase Realtime Database, and Bulma. Deployed on Google Cloud App Engine.
 
+[Demo on Google Sites](https://sites.google.com/view/digitalbreakoutdemo/)
+
 **This tool is not secure enough to be used in any security-focused setting. Use with caution.** 
 
 ## How it works
@@ -32,3 +34,5 @@ Adds POSTed data object to realtime database. Must have ```password``` and ```su
 If this tool has helped you, consider buying me a coffee.
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/L4L81FX1O)
+
+[Demo]: https://sites.google.com/view/digitalbreakoutdemo/home
