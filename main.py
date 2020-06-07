@@ -2,16 +2,16 @@ from flask import Flask, request, json, render_template
 import hashlib
 import base64
 import requests
-from flask_cors import CORS
+# from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 BASE_URL = "https://simple-website-lock-ab27.firebaseio.com/"
 
 
-def get_hash(str):
-    return hashlib.md5(str.encode('utf-8')).hexdigest()
+def get_hash(string):
+    return hashlib.md5(string.encode('utf-8')).hexdigest()
 
 
 def encode(key, string):
@@ -118,7 +118,7 @@ def user():
 
 
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found():
     return render_template('404.html'), 404
 
 
