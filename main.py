@@ -117,6 +117,11 @@ def user():
             json.dumps(False), content_type='application/json')
 
 
+@app.route('/robots.txt')
+def robots():
+    return app.send_static_file('robots.txt')
+
+
 @app.errorhandler(404)
 def page_not_found():
     return render_template('404.html'), 404
